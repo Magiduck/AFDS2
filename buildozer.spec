@@ -1,22 +1,22 @@
 [app]
 
 # (str) Title of your application
-title = AFDS2
+title = AFDS
 
 # (str) Package name
-package.name = afds2
+package.name = afds
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = group1.afds2
+package.domain = org.group1
 
 # (str) Source code where the main.py live
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,csv,wav
 
 # (list) List of inclusions using pattern matching
-#source.include_patterns = assets/*,images/*.png
+#source.include_patterns = audio/*.mp3
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python2,plyer,kivy
+requirements = hostpython2,kivy,plyer
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -85,7 +85,7 @@ fullscreen = 0
 #android.presplash_color = #FFFFFF
 
 # (list) Permissions
-#android.permissions = INTERNET,CALL_PHONE
+android.permissions = CALL_PHONE,ACCESS_COARSE_LOCATION,ACCESS_FINE_LOCATION,WRITE_SMS,SEND_SMS
 
 # (int) Target Android API, should be as high as possible.
 #android.api = 27
@@ -191,16 +191,13 @@ fullscreen = 0
 # project.properties automatically.)
 #android.library_references =
 
-# (list) Android shared libraries which will be added to AndroidManifest.xml using <uses-library> tag
-#android.uses_library =
-
 # (str) Android logcat filters to use
 #android.logcat_filters = *:S python:D
 
 # (bool) Copy library instead of making a libpymodules.so
 #android.copy_libs = 1
 
-# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
+# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86
 android.arch = armeabi-v7a
 
 #

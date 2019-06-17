@@ -238,11 +238,11 @@ class TimerScreen(Screen):
     def alarm(self):
         if self.count == 5:
             gps.start()
-            final_sound = SoundLoader.load(os.path.join("Audio", "contacting_help.mp3"))
+            final_sound = SoundLoader.load(os.path.join("Audio", "contacting_help.wav"))
             if final_sound:
                 final_sound.play()
         elif self.count % 5 == 0:
-            alarm_sound = SoundLoader.load(os.path.join("Audio", "alarm.mp3"))
+            alarm_sound = SoundLoader.load(os.path.join("Audio", "alarm.wav"))
             if alarm_sound:
                 alarm_sound.play()
 
