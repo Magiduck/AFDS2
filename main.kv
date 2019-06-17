@@ -2,6 +2,7 @@
     MainScreen:
     AccelerometerScreen:
     TimerScreen:
+    ContactsScreen:
 
 <MainScreen>:
     name: 'Main'
@@ -10,7 +11,11 @@
         Button:
             text: 'START/STOP'
             on_press: root.manager.current = 'Accelerometer'
-            size_hint: (1, .5)
+            size_hint: (1, .8)
+        Button:
+            text: 'Edit Contacts'
+            on_press: root.manager.current = 'Contacts'
+            size_hint: (1, .2)
 
 <AccelerometerScreen>:
     name: 'Accelerometer'
@@ -53,3 +58,23 @@
             id: ok_button
             on_press:
 	            root.cancel_timer()
+
+<ContactsScreen>:
+    name: 'Contacts'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text:'placeholder'
+            font_size: 120
+            size_hint: (1, .50)
+            id: phone_number_label
+        TextInput:
+            font_size: 72
+            size_hint: (1, .30)
+            id: phone_number_text_input
+            on_text_validate:
+                root.enter_phone_number()
+        Button:
+            text: 'BACK'
+            on_press: root.manager.current = 'Main'
+            size_hint: (1, .20)
