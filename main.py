@@ -28,6 +28,7 @@ Config.set('graphics', 'resizable', 0)
 Window.clearcolor = (0, 0, 0, 1.)
 
 isTimerScreen = False
+isAccelerometerScreen = False
 
 
 class MainScreen(Screen):
@@ -65,7 +66,7 @@ class AccelerometerScreen(Screen):
 
     def check_accel(self, dt):  # Main program for the accelerometer
         # update label
-        if accelerometer.acceleration[0] is not None and accelerometer.acceleration[1] is not None \
+        if isAccelerometerScreen and accelerometer.acceleration[0] is not None and accelerometer.acceleration[1] is not None \
                 and accelerometer.acceleration[2] is not None:
             self.x = accelerometer.acceleration[0]  # Getting the information for the accelerometer
             self.y = accelerometer.acceleration[1]
@@ -171,27 +172,28 @@ class TimerScreen(Screen):
 
 
 class ContactsScreen(Screen):
+    input_text = StringProperty(None)
 
     def __init__(self, **kwargs):
         super(ContactsScreen, self).__init__(**kwargs)
-        self.phone_number_input_text = ObjectProperty(None)
+        self.phone_number_text_input = ObjectProperty(None)
         self.phone_number_label = ObjectProperty(None)
+        self.input_text = "Please enter phone number"
         Clock.schedule_once(lambda dt: self.setup())
 
     def setup(self):
-        phone_number = "placeholder"
+        phone_number = ""
         with open('phone_numbers.csv', mode='r') as phone_numbers:
             student_reader = csv.reader(phone_numbers, delimiter=',')
             for row in student_reader:
                 if row:
-                    if "PLACEHOLDER" in row:
-                        phone_number = "Please enter phone number"
                     phone_number = row[0]
-        self.ids.phone_number_label.txt = phone_number
+        # self.ids.phone_number_label.txt = phone_number
+        self.input_text = phone_number
 
     def enter_phone_number(self):
-        input_phone_number = self.ids.phone_number_input_text.text
-        self.ids.phone_number_label.txt = input_phone_number
+        input_phone_number = self.input_text
+        # self.ids.phone_number_label.txt = input_phone_number
         with open('phone_numbers.csv', mode='w') as phone_numbers:
             student_writer = csv.writer(phone_numbers, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             student_writer.writerow(input_phone_number)
@@ -203,10 +205,19 @@ class ScreenManagement(ScreenManager):
         super(ScreenManagement, self).__init__(**kwargs)
         self.current = 'Main'
         Clock.schedule_interval(self.check_if_change_screens, 0.5)
+        Clock.schedule_interval(self.check_if_accelerometer, 0.5)
 
     def check_if_change_screens(self, dt):
         if isTimerScreen:
             self.current = 'Timer'
+
+    def check_if_accelerometer(self, dt):
+        if self.current == 'Accelerometer':
+            global isAccelerometerScreen
+            isAccelerometerScreen = True
+        else:
+            global isAccelerometerScreen
+            isAccelerometerScreen = False
 
 
 Builder.load_file("main.kv")
