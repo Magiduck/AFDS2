@@ -35,6 +35,31 @@ class MainScreen(Screen):
     pass
 
 
+class ContactsScreen(Screen):
+
+    def __init__(self, **kwargs):
+        super(ContactsScreen, self).__init__(**kwargs)
+        self.phone_number_text_input = ObjectProperty(None)
+        self.phone_number_label = ObjectProperty(None)
+        Clock.schedule_once(lambda dt: self.setup(), 3)
+
+    def setup(self):
+        phone_number = "Please enter a phone number"
+        with open('phone_numbers.csv', mode='r') as phone_numbers:
+            student_reader = csv.reader(phone_numbers, delimiter=',')
+            for row in student_reader:
+                if row:
+                    phone_number = row[0]
+        self.ids.phone_number_label.text = phone_number
+
+    def enter_phone_number(self):
+        input_phone_number = self.ids.phone_number_text_input.text
+        with open('phone_numbers.csv', mode='w') as phone_numbers:
+            student_writer = csv.writer(phone_numbers, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            student_writer.writerow([input_phone_number, ""])
+        self.ids.phone_number_label.text = input_phone_number
+
+
 class AccelerometerScreen(Screen):
     # this is the main widget that contains the game
     def __init__(self, **kwargs):
@@ -66,6 +91,7 @@ class AccelerometerScreen(Screen):
 
     def check_accel(self, dt):  # Main program for the accelerometer
         # update label
+        global isAccelerometerScreen
         if isAccelerometerScreen and accelerometer.acceleration[0] is not None and accelerometer.acceleration[1] is not None \
                 and accelerometer.acceleration[2] is not None:
             self.x = accelerometer.acceleration[0]  # Getting the information for the accelerometer
@@ -129,12 +155,17 @@ class TimerScreen(Screen):
     def timer(self, dt):
         if isTimerScreen:
             if self.count == 0:
+                Clock.unschedule(self.timer)
                 self.ids.countdown.font_size = 48
                 self.ids.countdown.text = self.get_map_location()
-                sms.send("+36306241796", self.get_map_location())
                 gps.stop()
-                Clock.unschedule(self.timer)
-                call.makecall("+36306241796")
+
+                with open('phone_numbers.csv', mode='r') as phone_numbers:
+                    student_reader = csv.reader(phone_numbers, delimiter=',')
+                    for phone_number in student_reader:
+                        if phone_number and phone_number[0] is not "Please enter a phone number":
+                            sms.send(phone_number[0], self.get_map_location())
+                            call.makecall(phone_number[0])
             else:
                 self.alarm()
                 self.count -= 1
@@ -171,34 +202,6 @@ class TimerScreen(Screen):
         return "https://www.google.nl/maps/@" + lat + "," + lon + ",20z"
 
 
-class ContactsScreen(Screen):
-    input_text = StringProperty(None)
-
-    def __init__(self, **kwargs):
-        super(ContactsScreen, self).__init__(**kwargs)
-        self.phone_number_text_input = ObjectProperty(None)
-        self.phone_number_label = ObjectProperty(None)
-        self.input_text = "Please enter phone number"
-        Clock.schedule_once(lambda dt: self.setup())
-
-    def setup(self):
-        phone_number = ""
-        with open('phone_numbers.csv', mode='r') as phone_numbers:
-            student_reader = csv.reader(phone_numbers, delimiter=',')
-            for row in student_reader:
-                if row:
-                    phone_number = row[0]
-        # self.ids.phone_number_label.txt = phone_number
-        self.input_text = phone_number
-
-    def enter_phone_number(self):
-        input_phone_number = self.input_text
-        # self.ids.phone_number_label.txt = input_phone_number
-        with open('phone_numbers.csv', mode='w') as phone_numbers:
-            student_writer = csv.writer(phone_numbers, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            student_writer.writerow(input_phone_number)
-
-
 class ScreenManagement(ScreenManager):
 
     def __init__(self, **kwargs):
@@ -212,11 +215,10 @@ class ScreenManagement(ScreenManager):
             self.current = 'Timer'
 
     def check_if_accelerometer(self, dt):
+        global isAccelerometerScreen
         if self.current == 'Accelerometer':
-            global isAccelerometerScreen
             isAccelerometerScreen = True
         else:
-            global isAccelerometerScreen
             isAccelerometerScreen = False
 
 

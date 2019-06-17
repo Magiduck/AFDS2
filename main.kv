@@ -1,8 +1,8 @@
 <ScreenManagement>:
     MainScreen:
+    ContactsScreen:
     AccelerometerScreen:
     TimerScreen:
-    ContactsScreen:
 
 <MainScreen>:
     name: 'Main'
@@ -16,6 +16,26 @@
             text: 'Edit Contacts'
             on_press: root.manager.current = 'Contacts'
             size_hint: (1, .2)
+
+<ContactsScreen>:
+    name: 'Contacts'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "Please enter a phone number"
+            id: phone_number_label
+            font_size: 72
+            size_hint: (1, .50)
+        TextInput:
+            id: phone_number_text_input
+            multiline: False
+            font_size: 72
+            size_hint: (1, .30)
+            on_text_validate: root.enter_phone_number()
+        Button:
+            text: 'BACK'
+            size_hint: (1, .20)
+            on_press: root.manager.current = 'Main'
 
 <AccelerometerScreen>:
     name: 'Accelerometer'
@@ -58,31 +78,3 @@
             id: ok_button
             on_press:
 	            root.cancel_timer()
-
-<ContactsScreen>:
-    name: 'Contacts'
-    BoxLayout:
-        orientation: 'vertical'
-        input_text: phone_number_text_input.text
-        Label:
-            text: root.input_text
-            font_size: 120
-            size_hint: (1, .50)
-            id: phone_number_label
-        TextInput:
-            text: root.input_text
-            multiline: False
-            font_size: 72
-            size_hint: (1, .30)
-            id: phone_number_text_input
-        BoxLayout:
-            orientation: 'horizontal'
-            size_hint: (1, .20)
-            Button:
-                text: 'SUBMIT'
-                size_hint: (.5, 1)
-                on_press: root.enter_phone_number()
-            Button:
-                text: 'BACK'
-                size_hint: (.5, 1)
-                on_press: root.manager.current = 'Main'

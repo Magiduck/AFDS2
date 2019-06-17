@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.kv" beforeDir="false" afterPath="$PROJECT_DIR$/main.kv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phone_numbers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/phone_numbers.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,24 +14,36 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/AFDS2$main.coverage" NAME="main Coverage Results" MODIFIED="1560795596269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AFDS2$main.coverage" NAME="main Coverage Results" MODIFIED="1560799048559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
+            <state relative-caret-position="-136">
+              <caret line="159" column="65" lean-forward="true" selection-start-line="159" selection-start-column="65" selection-end-line="159" selection-end-column="65" />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phone_numbers.csv">
+          <provider selected="true" editor-type-id="csv-text-editor">
+            <state>
+              <caret column="28" selection-start-column="28" selection-end-column="28" />
+            </state>
+          </provider>
+          <provider editor-type-id="csv-table-editor">
+            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="60" lean-forward="true" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
+            <state relative-caret-position="274">
+              <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -44,25 +57,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/phone_numbers.csv">
-          <provider selected="true" editor-type-id="csv-text-editor">
-            <state>
-              <caret column="11" selection-start-column="11" selection-end-column="11" />
-            </state>
-          </provider>
-          <provider editor-type-id="csv-table-editor">
-            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>contact</find>
       <find>.text</find>
-      <find>label</find>
       <find>unschedule</find>
       <find>setup</find>
       <find>true</find>
@@ -71,6 +71,12 @@
       <find>current</find>
       <find>accelerometer</find>
       <find>istimerscreen</find>
+      <find>input_text</find>
+      <find>global</find>
+      <find>isaccelerometerscreen</find>
+      <find>.txt</find>
+      <find>labelf</find>
+      <find>label</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -181,12 +187,12 @@
       <workItem from="1560762981305" duration="733000" />
       <workItem from="1560763730552" duration="8995000" />
       <workItem from="1560780054350" duration="6421000" />
-      <workItem from="1560794651784" duration="1325000" />
+      <workItem from="1560794651784" duration="5951000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21127000" />
+    <option name="totallyTimeSpent" value="25753000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -197,7 +203,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26770538" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.12889518" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -206,7 +212,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.194051" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.04249292" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -253,7 +259,7 @@
     <entry file="file://$PROJECT_DIR$/phone_numbers.csv">
       <provider selected="true" editor-type-id="csv-text-editor">
         <state>
-          <caret column="11" selection-start-column="11" selection-end-column="11" />
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
         </state>
       </provider>
       <provider editor-type-id="csv-table-editor">
@@ -262,15 +268,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
+        <state relative-caret-position="-136">
+          <caret line="159" column="65" lean-forward="true" selection-start-line="159" selection-start-column="65" selection-end-line="159" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="60" lean-forward="true" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
+        <state relative-caret-position="274">
+          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
         </state>
       </provider>
     </entry>
