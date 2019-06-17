@@ -1,0 +1,55 @@
+<ScreenManagement>:
+    MainScreen:
+    AccelerometerScreen:
+    TimerScreen:
+
+<MainScreen>:
+    name: 'Main'
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            text: 'START/STOP'
+            on_press: root.manager.current = 'Accelerometer'
+            size_hint: (1, .5)
+
+<AccelerometerScreen>:
+    name: 'Accelerometer'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'accelerometer:'
+            id: label
+            size_hint: (1, .2)
+        Label:
+            text: 'measure high value:'
+            id: labelf
+            size_hint: (1, .2)
+        Label:
+            text: 'measure low value:'
+            id: labely
+            size_hint: (1, .2)
+        Label:
+            text: 'Person has fallen: NO'
+            id: labelt
+            size_hint: (1, .2)
+        Label:
+            text: 'Fase:'
+            id: labelu
+            size_hint: (1, .2)
+
+<TimerScreen>:
+    name: 'Timer'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: '30'
+            font_size: 120
+            size_hint: (1, .75)
+            id: countdown
+        Button:
+            text: 'I am okay'
+            font_size: 72
+            size_hint: (1, .25)
+            id: ok_button
+            on_press:
+	            root.cancel_timer()
