@@ -44,23 +44,27 @@
         Label:
             text: 'accelerometer:'
             id: label
-            size_hint: (1, .2)
+            size_hint: (1, .16667)
         Label:
             text: 'measure high value:'
             id: labelf
-            size_hint: (1, .2)
+            size_hint: (1, .16667)
         Label:
             text: 'measure low value:'
             id: labely
-            size_hint: (1, .2)
+            size_hint: (1, .16667)
         Label:
             text: 'Person has fallen: NO'
             id: labelt
-            size_hint: (1, .2)
+            size_hint: (1, .16667)
         Label:
             text: 'Fase:'
             id: labelu
-            size_hint: (1, .2)
+            size_hint: (1, .16667)
+        Button:
+            text: 'BACK'
+            size_hint: (1, .16667)
+            on_press: root.manager.current = 'Main'
 
 <TimerScreen>:
     name: 'Timer'

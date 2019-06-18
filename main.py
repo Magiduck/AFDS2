@@ -83,17 +83,20 @@ class AccelerometerScreen(Screen):
         self.high_measuring = 0
         self.timer_1 = 0
         self.timer_2 = 0
+        self.timer_freefall = 0
+        self.isFreeFall = False
 
         # setup timer to update accelerometer
         # we want to regularly read the accelerometer
         Clock.schedule_interval(self.check_accel, 1.0 / 60)
         # these four functions use other plyer features to talk to the android api
+        Clock.schedule_interval(lambda dt: self.check_freefall(), 0.01)
 
     def check_accel(self, dt):  # Main program for the accelerometer
         # update label
         global isAccelerometerScreen
-        if isAccelerometerScreen and accelerometer.acceleration[0] is not None and accelerometer.acceleration[1] is not None \
-                and accelerometer.acceleration[2] is not None:
+        if isAccelerometerScreen and accelerometer.acceleration[0] is not None \
+                and accelerometer.acceleration[1] is not None and accelerometer.acceleration[2] is not None:
             self.x = accelerometer.acceleration[0]  # Getting the information for the accelerometer
             self.y = accelerometer.acceleration[1]
             self.z = accelerometer.acceleration[2]
@@ -101,15 +104,17 @@ class AccelerometerScreen(Screen):
             txt = str(self.total_accel)
             self.ids.label.text = 'accelerometer: ' + txt
 
-            if self.total_accel < 5.88399 or self.falling is True:  # First fase falling
+            self.ids.labelu.text = 'Fase:'
+            if self.isFreeFall is True or self.falling is True:  # First fase falling
                 self.falling = True
                 self.ids.labelu.text = 'Fase:' + '1 Succeeded'
-                if self.total_accel > 29.4 or self.hitGround is True:  # Second fase hitting the ground
+                if self.total_accel > 15 or self.hitGround is True:  # Second fase hitting the ground
+                    self.isFreeFall = False
                     self.hitGround = True
                     self.ids.labelu.text = 'Fase:' + '2 Succeeded'
                     self.timer_1 = self.timer_1 + 1
                     if self.timer_1 > 150:
-                        if 5.88399 < self.total_accel < 29.4:  # Third fase sending a alarm
+                        if 6 < self.total_accel < 15:  # Third fase sending a alarm
                             if self.timer_1 > 300:
                                 self.hitGround = False
                                 self.falling = False
@@ -124,7 +129,7 @@ class AccelerometerScreen(Screen):
                             self.falling = False
                             self.timer_1 = 0
                             self.ids.labelu.text = 'Fase:' + '3 Movement detected'
-                elif 5.88399 < self.total_accel < 29.4:  # Auto reset for when the fall is minor
+                elif 6 < self.total_accel < 15:  # Auto reset for when the fall is minor
                     self.timer_2 = self.timer_2 + 1
                     if self.timer_2 > 150:
                         self.hitGround = False
@@ -139,6 +144,22 @@ class AccelerometerScreen(Screen):
             if self.total_accel > self.high_measuring:  # Measuring the High point of the falling
                 self.high_measuring = self.total_accel
                 self.ids.labelf.text = 'measure high value:' + str(self.high_measuring)
+
+    def check_freefall(self):
+        global isAccelerometerScreen
+        if isAccelerometerScreen and accelerometer.acceleration[0] is not None \
+                and accelerometer.acceleration[1] is not None and accelerometer.acceleration[2] is not None:
+            self.x = accelerometer.acceleration[0]  # Getting the information for the accelerometer
+            self.y = accelerometer.acceleration[1]
+            self.z = accelerometer.acceleration[2]
+            self.total_accel = math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)  # Calculating gravity
+            if self.total_accel < 1:  # First fase falling
+                self.timer_freefall += 1
+                if self.timer_freefall == 16:
+                    self.isFreeFall = True
+            else:
+                self.timer_freefall = 0
+                self.isFreeFall = False
 
 
 class TimerScreen(Screen):
